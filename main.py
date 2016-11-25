@@ -29,7 +29,7 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        return self.render_template("base.html")
+        return self.render_template("main.html")
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="main-page"),
