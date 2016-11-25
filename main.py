@@ -31,6 +31,12 @@ class MainHandler(BaseHandler):
     def get(self):
         return self.render_template("main.html")
 
+
+class CookieAlertHandler(BaseHandler):
+    def post(self):
+        # TODO
+        return self.redirect_to("main-page")
+
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="main-page"),
 ], debug=True)

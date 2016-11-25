@@ -37,8 +37,17 @@
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
-        </nav>
-    </div>
+        </nav> <!-- navbar end -->
+
+        <div class="alert alert-danger" role="alert">
+            Hey, we use cookies. Do you accept them? :)
+            <button class="btn btn-success btn-xs">I accept</button>
+        </div>
+
+        {% block content %}
+        {% endblock content %}
+
+    </div> <!-- container end -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
