@@ -23,6 +23,11 @@ class BaseHandler(webapp2.RequestHandler):
     def render_template(self, view_filename, params=None):
         if not params:
             params = {}
+
+        cookie_law = self.request.cookies.get("cookie_law")
+        if cookie_law:
+            params["cookies"] = True
+
         template = jinja_env.get_template(view_filename)
         return self.response.out.write(template.render(params))
 
@@ -34,9 +39,10 @@ class MainHandler(BaseHandler):
 
 class CookieAlertHandler(BaseHandler):
     def post(self):
-        # TODO
+        self.response.set_cookie(key="cookie_law", value="accepted")
         return self.redirect_to("main-page")
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="main-page"),
+    webapp2.Route('/set-cookie', CookieAlertHandler, name="set-cookie"),
 ], debug=True)
