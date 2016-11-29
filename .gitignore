@@ -2,6 +2,7 @@
 .idea
 *.pyc
 .DS_Store
+libs/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
