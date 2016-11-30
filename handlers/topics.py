@@ -19,4 +19,13 @@ class TopicAdd(BaseHandler):
         new_topic = Topic(title=title, content=text, author_email=user.email())
         new_topic.put()  # put() saves the object in Datastore
 
-        return self.write("Topic successfully created!")
+        return self.redirect_to("topic-details", topic_id=new_topic.key.id())
+
+
+class TopicDetails(BaseHandler):
+    def get(self, topic_id):
+        topic = Topic.get_by_id(int(topic_id))
+
+        params = {"topic": topic}
+
+        return self.render_template("topic_details.html", params=params)

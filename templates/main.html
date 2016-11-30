@@ -7,4 +7,28 @@
     <h1>Ninja Tech Forum</h1>
     <p>Welcome to Ninja Tech Forum - the best forum for tech fans. Coming soon!</p>
 </div>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Topic title</th>
+                    <th>Author</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for topic in topics %}
+                <tr>
+                    <td><a href="/topic/{{ topic.key.id() }}">{{ topic.title }}</a></td>
+                    <td>{{ topic.author_email }}</td>
+                    <td>{{ topic.created.strftime('%d.%m.%Y at %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock content %}
