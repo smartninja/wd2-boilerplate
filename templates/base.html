@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Ninja Tech Forum</a>
+              <a class="navbar-brand" href="/">Ninja Tech Forum</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,6 +35,7 @@
                 <li><a href="#">About</a></li>
                 {% if logout_url %}
                     <li><a href="#">{{ user.email() }}</a></li>
+                    <li><a href="/topic/add">Add new topic</a></li>
                     <li><a href="{{ logout_url }}">Logout</a></li>
                 {% elif login_url %}
                     <li><a href="{{ login_url }}">Login</a></li>

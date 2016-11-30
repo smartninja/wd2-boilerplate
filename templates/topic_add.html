@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Add new topic{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label>Text</label>
+                <textarea name="text" class="form-control" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
