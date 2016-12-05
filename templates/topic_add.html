@@ -8,6 +8,8 @@
         <h2>Add new topic</h2>
 
         <form method="post">
+            <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" class="form-control" name="title" required>

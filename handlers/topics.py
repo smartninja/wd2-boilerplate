@@ -1,13 +1,26 @@
 from google.appengine.api import users
+from google.appengine.api import memcache
+import uuid
 from handlers.base import BaseHandler
 from models.topic import Topic
 
 
 class TopicAdd(BaseHandler):
     def get(self):
-        return self.render_template("topic_add.html")
+        csrf_token = str(uuid.uuid4())  # convert UUID to string
+        memcache.add(key=csrf_token, value=True, time=600)
+
+        params = {"csrf_token": csrf_token}
+
+        return self.render_template("topic_add.html", params=params)
 
     def post(self):
+        csrf_token = self.request.get("csrf_token")
+        mem_token = memcache.get(key=csrf_token)  # find if this CSRF exists in memcache
+
+        if not mem_token:  # if token does not exist in memcache, write the following message
+            return self.write("You are evil attacker...")
+
         user = users.get_current_user()
 
         if not user:
