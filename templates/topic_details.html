@@ -3,6 +3,7 @@
 {% block title %}{{ topic.title }}{% endblock title %}
 
 {% block content %}
+<!-- TOPIC -->
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-primary">
@@ -11,11 +12,54 @@
             </div>
 
             <div class="panel-body">
-                <p><strong>Author: </strong>{{ topic.author_email }}</p>
+                <p><strong>Author: </strong>{{ topic.author_email }} ({{topic.created.strftime("%d.%m.%Y at %H:%M")}})</p>
 
                 <p>{{ topic.content }}</p>
             </div>
         </div>
     </div>
+</div> <!-- END TOPIC -->
+
+<hr>
+
+<!-- COMMENTS -->
+{% for comment in comments %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ comment.author_email }} on {{ comment.created.strftime("%d.%m.%Y at %H:%M") }}</h3>
+            </div>
+
+            <div class="panel-body">
+                <p>{{ comment.content }}</p>
+            </div>
+        </div>
+    </div>
 </div>
+{% endfor %}
+<!-- END COMMENTS -->
+
+<!-- ADD COMMENT -->
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add new comment</h3>
+            </div>
+
+            <div class="panel-body">
+                <form action="/topic/{{topic.key.id()}}/comment/add" method="post">
+                    <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
+                    <div class="form-group">
+                        <textarea name="comment-text" class="form-control" rows="6" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Submit comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> <!-- END ADD COMMENT -->
 {% endblock content %}
