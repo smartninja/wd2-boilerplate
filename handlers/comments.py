@@ -1,18 +1,13 @@
 from handlers.base import BaseHandler
-from google.appengine.api import memcache
 from google.appengine.api import users
 from models.comment import Comment
 from models.topic import Topic
+from utils.decorators import validate_csrf
 
 
 class CommentAdd(BaseHandler):
+    @validate_csrf
     def post(self, topic_id):
-        csrf_token = self.request.get("csrf_token")
-        mem_token = memcache.get(key=csrf_token)  # find if this CSRF exists in memcache
-
-        if not mem_token:  # if token does not exist in memcache, write the following message
-            return self.write("You are evil attacker...")
-
         user = users.get_current_user()
 
         if not user:

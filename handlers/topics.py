@@ -1,21 +1,16 @@
 from google.appengine.api import users
-from google.appengine.api import memcache
 from handlers.base import BaseHandler
 from models.comment import Comment
 from models.topic import Topic
+from utils.decorators import validate_csrf
 
 
 class TopicAdd(BaseHandler):
     def get(self):
         return self.render_template_with_csrf("topic_add.html")
 
+    @validate_csrf
     def post(self):
-        csrf_token = self.request.get("csrf_token")
-        mem_token = memcache.get(key=csrf_token)  # find if this CSRF exists in memcache
-
-        if not mem_token:  # if token does not exist in memcache, write the following message
-            return self.write("You are evil attacker...")
-
         user = users.get_current_user()
 
         if not user:
