@@ -15,6 +15,12 @@
                 <p><strong>Author: </strong>{{ topic.author_email }} ({{topic.created.strftime("%d.%m.%Y at %H:%M")}})</p>
 
                 <p>{{ topic.content }}</p>
+
+                {% if can_delete  %}
+                <form action="/topic/{{topic.key.id()}}/delete" method="post">
+                    <button class="btn btn-danger">Delete topic</button>
+                </form>
+                {% endif  %}
             </div>
         </div>
     </div>

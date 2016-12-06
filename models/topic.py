@@ -7,3 +7,10 @@ class Topic(ndb.Model):
     author_email = ndb.StringProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
     deleted = ndb.BooleanProperty(default=False)
+
+    @classmethod
+    def delete(cls, topic):
+        topic.deleted = True
+        topic.put()
+
+        return topic

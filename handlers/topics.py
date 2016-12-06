@@ -30,6 +30,23 @@ class TopicDetails(BaseHandler):
         topic = Topic.get_by_id(int(topic_id))
         comments = Comment.query(Comment.topic_id == topic.key.id(), Comment.deleted == False).order(Comment.created).fetch()
 
-        params = {"topic": topic, "comments": comments}
+        # check if current user can delete the topic
+        can_delete = False
+        if users.get_current_user().email() == topic.author_email or users.is_current_user_admin():
+            can_delete = True
+
+        params = {"topic": topic, "comments": comments, "can_delete": can_delete}
 
         return self.render_template_with_csrf("topic_details.html", params=params)
+
+
+class TopicDelete(BaseHandler):
+    def post(self, topic_id):
+        topic = Topic.get_by_id(int(topic_id))
+
+        user = users.get_current_user()
+
+        if topic.author_email == user.email() or users.is_current_user_admin():
+            Topic.delete(topic=topic)
+
+        return self.redirect_to("main-page")
