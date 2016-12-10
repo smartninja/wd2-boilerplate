@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import webapp2
+from crons.delete_comments import DeleteCommentsCron
 from crons.delete_topics import DeleteTopicsCron
 from handlers.base import MainHandler, CookieAlertHandler
 from handlers.comments import CommentAdd, CommentDelete
@@ -19,5 +20,6 @@ app = webapp2.WSGIApplication([
 
     webapp2.Route('/task/email-new-comment', EmailNewCommentWorker, name="task-email-new-comment"),
 
-    webapp2.Route("/cron/delete-topics", DeleteTopicsCron, name="cron-delete-topics")
+    webapp2.Route("/cron/delete-topics", DeleteTopicsCron, name="cron-delete-topics"),
+    webapp2.Route("/cron/delete-comments", DeleteCommentsCron, name="cron-delete-comments"),
 ], debug=True)
