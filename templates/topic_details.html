@@ -70,10 +70,33 @@
 
                 {% if user  %}
                     {% if comment.author_email == user.email() or user.admin  %}
-                    <form action="/comment/{{comment.key.id()}}/delete" method="post">
-                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
-                        <button class="btn btn-danger">Delete comment</button>
-                    </form>
+                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#deleteCommentModal{{comment.key.id()}}">Delete comment</a>
+
+                    <!-- Modal - delete comment -->
+                    <div class="modal fade" id="deleteCommentModal{{comment.key.id()}}" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel{{comment.key.id()}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form method="post" action="/comment/{{comment.key.id()}}/delete">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="deleteCommentModalLabel{{comment.key.id()}}">Delete comment</h4>
+                                    </div>
+
+                                    <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
+                                    <div class="modal-body">
+                                        Do you really want to delete this comment?
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Delete comment</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End modal - delete comment -->
                     {% endif  %}
                 {% endif  %}
             </div>
