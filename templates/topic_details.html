@@ -16,10 +16,13 @@
 
                 <p>{{ topic.content }}</p>
 
-                {% if can_delete  %}
-                <form action="/topic/{{topic.key.id()}}/delete" method="post">
-                    <button class="btn btn-danger">Delete topic</button>
-                </form>
+                {% if user  %}
+                    {% if topic.author_email == user.email() or user.admin  %}
+                    <form action="/topic/{{topic.key.id()}}/delete" method="post">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                        <button class="btn btn-danger">Delete topic</button>
+                    </form>
+                    {% endif  %}
                 {% endif  %}
             </div>
         </div>
@@ -39,6 +42,15 @@
 
             <div class="panel-body">
                 <p>{{ comment.content }}</p>
+
+                {% if user  %}
+                    {% if comment.author_email == user.email() or user.admin  %}
+                    <form action="/comment/{{comment.key.id()}}/delete" method="post">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                        <button class="btn btn-danger">Delete comment</button>
+                    </form>
+                    {% endif  %}
+                {% endif  %}
             </div>
         </div>
     </div>

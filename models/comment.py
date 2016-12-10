@@ -22,3 +22,10 @@ class Comment(ndb.Model):
                                                              "topic_id": topic.key.id()})
 
         return comment
+
+    @classmethod
+    def delete(cls, comment):
+        comment.deleted = True
+        comment.put()
+
+        return comment
