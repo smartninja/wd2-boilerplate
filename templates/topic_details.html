@@ -18,10 +18,35 @@
 
                 {% if user  %}
                     {% if topic.author_email == user.email() or user.admin  %}
-                    <form action="/topic/{{topic.key.id()}}/delete" method="post">
-                        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
-                        <button class="btn btn-danger">Delete topic</button>
-                    </form>
+                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#deleteTopicModal">Delete topic</a>
+
+                    <!-- Modal - delete topic -->
+                    <div class="modal fade" id="deleteTopicModal" tabindex="-1" role="dialog" aria-labelledby="deleteTopicModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form method="post" action="/topic/{{topic.key.id()}}/delete">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="deleteTopicLabel">Delete topic</h4>
+                                    </div>
+
+                                    <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+
+                                    <div class="modal-body">
+                                        <p>
+                                            Do you really want to delete this topic?
+                                        </p>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger">Delete topic</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End modal - delete topic -->
                     {% endif  %}
                 {% endif  %}
             </div>
