@@ -7,4 +7,5 @@ class Comment(ndb.Model):
     author_full_name = ndb.StringProperty()
     topic_id = ndb.IntegerProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
     deleted = ndb.BooleanProperty(default=False)
