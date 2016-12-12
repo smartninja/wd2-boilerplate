@@ -19,15 +19,15 @@ class MainPageTests(unittest.TestCase):
         self.testbed.activate()
 
         """ Uncomment the stubs that you need to run tests. """
-        # self.testbed.init_datastore_v3_stub()
+        self.testbed.init_datastore_v3_stub()
         # self.testbed.init_memcache_stub()
         # self.testbed.init_mail_stub()
         # self.testbed.init_taskqueue_stub()
-        # self.testbed.init_user_stub()
+        self.testbed.init_user_stub()
         # ...
 
         """ Uncomment if you need user (Google Login) and if this user needs to be admin. """
-        # os.environ['USER_EMAIL'] = 'some.user@example.com'
+        os.environ['USER_EMAIL'] = 'some.user@example.com'
         # os.environ['USER_IS_ADMIN'] = '1'
 
     def tearDown(self):
