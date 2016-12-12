@@ -36,3 +36,5 @@ class MainPageTests(unittest.TestCase):
     def test_main_page_handler(self):
         get = self.testapp.get('/')  # get main handler
         self.assertEqual(get.status_int, 200)  # if GET request was ok, it should return 200 status code
+        self.assertIn("Welcome to Ninja Tech Forum", get.body)
+        self.assertNotIn("Welcome to IBM", get.body)
