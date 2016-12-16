@@ -4,7 +4,7 @@ import webapp2
 import webtest
 
 from google.appengine.ext import testbed
-from main import MainHandler
+from handlers.base import MainHandler
 
 
 class MainPageTests(unittest.TestCase):
