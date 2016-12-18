@@ -4,11 +4,14 @@ from crons.delete_comments import DeleteCommentsCron
 from crons.delete_topics import DeleteTopicsCron
 from handlers.base import MainHandler, CookieAlertHandler
 from handlers.comments import CommentAdd, CommentDelete
+from handlers.gallery import GalleryHandler
 from handlers.topics import TopicAdd, TopicDetails, TopicDelete
 from workers.email_new_comment import EmailNewCommentWorker
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="main-page"),
+    webapp2.Route('/gallery', GalleryHandler, name="gallery"),
+
     webapp2.Route('/set-cookie', CookieAlertHandler, name="set-cookie"),
 
     webapp2.Route('/topic/add', TopicAdd, name="topic-add"),

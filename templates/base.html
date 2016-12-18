@@ -12,6 +12,8 @@
 
     <!-- Bootstrap -->
     <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Lightbox -->
+    <link href="/assets/lightbox/css/lightbox.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,6 +35,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">About</a></li>
+                <li><a href="/gallery">Gallery</a></li>
                 {% if logout_url %}
                     <li><a href="#">{{ user.email() }}</a></li>
                     <li><a href="/topic/add">Add new topic</a></li>
@@ -65,6 +68,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/assets/bootstrap/js/bootstrap.js"></script>
+    <!-- Lightbox JS -->
+    <script src="/assets/lightbox/js/lightbox.js"></script>
     {% block scripts %}
     {% endblock scripts %}
 </body>
