@@ -29,22 +29,11 @@
 {% block scripts %}
 <script>
     $(document).ready(function() {
-        console.log("ready!");
-
-        var addTopicHeading = $("#add-topic-heading");
-
-        addTopicHeading.css("font-size", "14px");
-
-        addTopicHeading.hide();
-        addTopicHeading.show();
-
         var addTopicButton = $("#add-topic-button");
 
-        addTopicButton.removeClass("btn-success");
-        addTopicButton.addClass("btn-danger");
-
-        addTopicTitle = $("#add-topic-title");
-        addTopicTitle.attr("placeholder", "Add topic title");
+        addTopicButton.click(function() {
+            addTopicButton.hide();
+        });
     });
 </script>
 {% endblock scripts %}
