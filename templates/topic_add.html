@@ -20,6 +20,11 @@
                 <textarea name="text" class="form-control" rows="6" required></textarea>
             </div>
 
+            <div class="form-group">
+                <label>What is the sum of 2 and 8?</label>
+                <input type="text" class="form-control" id="add-topic-sum" required>
+            </div>
+
             <button type="submit" class="btn btn-success" id="add-topic-button">Submit</button>
         </form>
     </div>
@@ -30,9 +35,16 @@
 <script>
     $(document).ready(function() {
         var addTopicButton = $("#add-topic-button");
+        var addTopicSum = $("#add-topic-sum");
 
-        addTopicButton.click(function() {
-            addTopicButton.hide();
+        addTopicButton.click(function(e) {
+            if (addTopicSum.val() === "10"){
+                addTopicButton.hide();
+                console.log("yaaay");
+            } else {
+                alert("You entered a wrong sum! Try again.");
+                e.preventDefault();
+            }
         });
     });
 </script>
