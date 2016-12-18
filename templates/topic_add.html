@@ -5,14 +5,14 @@
 {% block content %}
 <div class="row">
     <div class="col-md-6">
-        <h2>Add new topic</h2>
+        <h2 id="add-topic-heading">Add new topic</h2>
 
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{csrf_token}}">
 
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" class="form-control" name="title" required>
+                <input type="text" class="form-control" name="title" id="add-topic-title" required>
             </div>
 
             <div class="form-group">
@@ -20,8 +20,31 @@
                 <textarea name="text" class="form-control" rows="6" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success" id="add-topic-button">Submit</button>
         </form>
     </div>
 </div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        console.log("ready!");
+
+        var addTopicHeading = $("#add-topic-heading");
+
+        addTopicHeading.css("font-size", "14px");
+
+        addTopicHeading.hide();
+        addTopicHeading.show();
+
+        var addTopicButton = $("#add-topic-button");
+
+        addTopicButton.removeClass("btn-success");
+        addTopicButton.addClass("btn-danger");
+
+        addTopicTitle = $("#add-topic-title");
+        addTopicTitle.attr("placeholder", "Add topic title");
+    });
+</script>
+{% endblock scripts %}
